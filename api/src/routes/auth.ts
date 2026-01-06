@@ -71,4 +71,9 @@ router.get('/health', (_, res) => {
   res.json({ ok: true })
 })
 
+router.get('/db-check', async (_, res) => {
+  const result = await pool.query('SELECT 1 as ok')
+  res.json(result.rows[0])
+})
+
 export default router
