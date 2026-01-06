@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import authRoutes from './routes/auth'
 const PORT = process.env.PORT || 3333
+import 'dotenv/config'
 
 const app = express()
 

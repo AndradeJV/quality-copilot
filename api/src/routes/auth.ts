@@ -67,4 +67,8 @@ router.get('/users-active', async (req, res) => {
   }
 })
 
+router.get('/health', (_, res) => {
+  res.json({ ok: true })
+})
+
 export default router
