@@ -52,10 +52,10 @@ export default function Home() {
 
     const userMessage: Message = {
       role: 'user',
-      content: input
+      content: input,
     }
 
-    setMessages((prev) => [...prev, userMessage])
+    setMessages(prev => [...prev, userMessage])
     setInput('')
     setLoading(true)
 
@@ -63,22 +63,22 @@ export default function Home() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         requirement: userMessage.content,
-        persona
-      })
+        persona,
+      }),
     })
 
     const data = await res.json()
 
     const assistantMessage: Message = {
       role: 'assistant',
-      content: data.output
+      content: data.output,
     }
 
-    setMessages((prev) => [...prev, assistantMessage])
+    setMessages(prev => [...prev, assistantMessage])
     setLoading(false)
   }
 
@@ -106,12 +106,8 @@ export default function Home() {
       <header className="fixed top-0 left-0 right-0 z-10 p-4 border-b border-indigo-500/20 bg-inherit">
         <div className="max-w-3xl mx-auto flex justify-between items-center">
           <div>
-            <h1 className="text-lg font-bold text-indigo-500">
-              Quality Copilot
-            </h1>
-            <p className="text-xs text-gray-400">
-              Requisitos → Hipóteses → Qualidade
-            </p>
+            <h1 className="text-lg font-bold text-indigo-500">Quality Copilot</h1>
+            <p className="text-xs text-gray-400">Requisitos → Hipóteses → Qualidade</p>
           </div>
 
           <button
@@ -130,23 +126,16 @@ export default function Home() {
       </header>
 
       {/* CHAT */}
-      <section
-        className="pt-20 overflow-y-auto"
-        style={{ paddingBottom: FOOTER_HEIGHT }}
-      >
+      <section className="pt-20 overflow-y-auto" style={{ paddingBottom: FOOTER_HEIGHT }}>
         <div className="max-w-3xl mx-auto p-6 space-y-6">
           {messages.length === 0 && (
-            <p className="text-sm text-gray-400">
-              Envie um requisito para começar a conversa 👇
-            </p>
+            <p className="text-sm text-gray-400">Envie um requisito para começar a conversa 👇</p>
           )}
 
           {messages.map((msg, index) => (
             <div
               key={index}
-              className={`flex ${
-                msg.role === 'user' ? 'justify-end' : 'justify-start'
-              }`}
+              className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
             >
               <div
                 className={`
@@ -167,9 +156,7 @@ export default function Home() {
 
           {loading && (
             <div className="flex justify-start">
-              <div className="text-sm text-gray-400 animate-pulse">
-                Gerando cenários...
-              </div>
+              <div className="text-sm text-gray-400 animate-pulse">Gerando cenários...</div>
             </div>
           )}
 
@@ -184,12 +171,14 @@ export default function Home() {
             <select
               className={`
                 text-xs rounded-md p-1 w-32 border
-                ${darkMode
-                  ? 'bg-gray-900 border-gray-700 text-gray-100'
-                  : 'bg-white border-gray-300 text-gray-900'}
+                ${
+                  darkMode
+                    ? 'bg-gray-900 border-gray-700 text-gray-100'
+                    : 'bg-white border-gray-300 text-gray-900'
+                }
               `}
               value={persona}
-              onChange={(e) => setPersona(e.target.value)}
+              onChange={e => setPersona(e.target.value)}
             >
               <option value="qa">QA</option>
               <option value="dev">Dev</option>
@@ -202,14 +191,16 @@ export default function Home() {
               placeholder="Descreva o requisito..."
               className={`
                 w-full resize-none rounded-lg p-3 text-sm border
-                ${darkMode
-                  ? 'bg-gray-900 border-gray-700 text-gray-100 placeholder-gray-500'
-                  : 'bg-white border-gray-300 text-gray-900 placeholder-gray-400'}
+                ${
+                  darkMode
+                    ? 'bg-gray-900 border-gray-700 text-gray-100 placeholder-gray-500'
+                    : 'bg-white border-gray-300 text-gray-900 placeholder-gray-400'
+                }
                 focus:outline-none focus:ring-2 focus:ring-indigo-500
               `}
               value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => {
+              onChange={e => setInput(e.target.value)}
+              onKeyDown={e => {
                 if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
                   sendMessage()
                 }
@@ -230,9 +221,7 @@ export default function Home() {
           </button>
         </div>
 
-        <p className="text-center text-xs text-gray-500 mt-2">
-          Ctrl/⌘ + Enter para enviar
-        </p>
+        <p className="text-center text-xs text-gray-500 mt-2">Ctrl/⌘ + Enter para enviar</p>
       </footer>
     </main>
   )

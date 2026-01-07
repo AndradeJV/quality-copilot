@@ -26,7 +26,7 @@ export default function LoginPage() {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({ email, password }),
     })
 
     const data = await res.json()
@@ -44,9 +44,7 @@ export default function LoginPage() {
   return (
     <main className="min-h-screen flex items-center justify-center bg-gray-950">
       <div className="w-full max-w-sm bg-gray-900 p-6 rounded-xl space-y-4">
-        <h1 className="text-xl font-bold text-white text-center">
-          Quality Copilot
-        </h1>
+        <h1 className="text-xl font-bold text-white text-center">Quality Copilot</h1>
 
         <input
           className="w-full p-2 rounded bg-gray-800 text-white"
@@ -63,9 +61,7 @@ export default function LoginPage() {
           onChange={e => setPassword(e.target.value)}
         />
 
-        {error && (
-          <p className="text-red-400 text-sm">{error}</p>
-        )}
+        {error && <p className="text-red-400 text-sm">{error}</p>}
 
         <button
           onClick={handleLogin}

@@ -2,7 +2,7 @@ import OpenAI from 'openai'
 import { NextResponse } from 'next/server'
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
+  apiKey: process.env.OPENAI_API_KEY,
 })
 
 /**
@@ -113,7 +113,7 @@ Estruture a resposta em:
 2. Pontos críticos de UX
 3. Cenários de erro e feedback
 4. Perguntas de validação
-`
+`,
 }
 
 /**
@@ -124,10 +124,7 @@ export async function POST(req: Request) {
     const { requirement, persona } = await req.json()
 
     if (!requirement) {
-      return NextResponse.json(
-        { error: 'Requisito é obrigatório' },
-        { status: 400 }
-      )
+      return NextResponse.json({ error: 'Requisito é obrigatório' }, { status: 400 })
     }
 
     const systemPrompt = `
@@ -140,20 +137,17 @@ ${PERSONA_PROMPTS[persona] || PERSONA_PROMPTS.qa}
       model: 'gpt-4o-mini',
       messages: [
         { role: 'system', content: systemPrompt },
-        { role: 'user', content: requirement }
+        { role: 'user', content: requirement },
       ],
-      temperature: 0.4
+      temperature: 0.4,
     })
 
     return NextResponse.json({
-      output: completion.choices[0].message.content
+      output: completion.choices[0].message.content,
     })
   } catch (error) {
     console.error('Erro ao gerar resposta:', error)
 
-    return NextResponse.json(
-      { error: 'Erro ao gerar resposta da IA' },
-      { status: 500 }
-    )
+    return NextResponse.json({ error: 'Erro ao gerar resposta da IA' }, { status: 500 })
   }
 }
