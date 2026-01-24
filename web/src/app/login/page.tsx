@@ -74,7 +74,7 @@ export default function LoginPage() {
             disabled:opacity-50
           "
         >
-          {loading ? 'Entrando...' : 'Entrar'}
+          {loading ? 'testando...' : 'Entrar'}
         </button>
       </div>
     </main>
